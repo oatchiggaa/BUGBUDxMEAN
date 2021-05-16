@@ -1,0 +1,351 @@
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aria is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>ยืนยันการจองของ</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a  class="navbar-brand logo-image" href="{% url 'myapp:home' %}"><img src="{% static 'images/logo.png' %}" alt="alternative"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button> 
+        
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+            {% if request.user.customer %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:mybook' %}">การจองของฉัน</a>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            {% endif %}
+            <li class="nav-item dropdown">
+                {% if request.user.customer %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ข้อความ
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'myapp:text' %}">ข้อความ</a>
+                <a class="dropdown-item" href="{% url 'myapp:notifications' %}">การแจ้งเตือน</a>
+                </div>
+                {% endif %}
+            </li>
+            <li class="nav-item dropdown">
+                
+                <li class="nav-item dropdown"><img src="{% static 'images/profile.JPG' %}" alt="profile_image" style="border-radius: 50%; height: 25px; width: 25px;">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if request.user.customer %}
+                <a class="dropdown-item" href="{% url 'myapp:customerprofile' %}">แก้ไขโปรไฟล์</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerrate' %}">รีวิวของฉัน</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogout' %}">Logout</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'myapp:customerregistration' %}">Register</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogin' %}">Login</a>
+                {% endif %}
+                </div>
+            </li>
+            
+        </div>
+    </nav>
+     <!-- Header -->
+      <!-- Header -->
+    <header id="header" class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>การจ่ายเงิน</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <body>
+        <div class="container">
+            <div class="col-lg-12 p-5">
+                <h2>การจ่ายเงิน</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <p><b>สรุปการจอง</b></p>
+                    <p>กรุงเทพ และปริมลฑล - บริการทำความสะอาด</p>
+                    <p>2 ชม.</p>
+                    <p>30 เม.ย. 2021 - 10.00</p>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            รวม
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <b>฿500.00</b>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <i class="fas fa-tags"></i>โค้ดส่วนลด
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            เลือกโค้ดส่วนลด<i class="fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            ภาษีมูลค่าเพิ่ม 7%
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            ฿35.00 
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <b>รวมทั้งสิ้น</b>
+                        </div>
+                        <div class="col-sm-6 text-right">
+                            <p style="color: #14bf98;">฿535.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <h3>ยืนยันและชำระเงิน</h3>
+                    <b>ผู้รับบริการ</b>
+                    <p>ชื่อ-สกุล</p>
+                    <input type="text">
+                    <p>เบอร์โทร(ไม่ต้องใส่ขีด)</p>
+                    <input type="text">
+                    <hr>
+                    <p>ที่อยู่ - ห้องเลขที่, บ้านเลขที่, ตึก, หมู่บ้าน, ถนน</p>
+                    <input type="text">
+                    <label for="province">จังหวัด</label>
+                    <select name="province" id="province">
+                        <option value="none">เลือกจังหวัด</option>
+                        <option value="select">dummy</option>
+                    </select>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="district">เขต/อำเภอ</label>
+                            <select name="district" id="district">
+                                <option value="none">เลือกอำเภอ</option>
+                                <option value="select">dummy</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="zone">แขวง/ตำบล(ระบุหรือไม่ก็ได้)</label>
+                            <select name="zone" id="zone">
+                                <option value="none">เลือกตำบล</option>
+                                <option value="select">dummy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p>ที่พักของคุณมีสัตว์เลี้ยงหรือไม่(หากมีโปรดระบุ)</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div>
+                                <input type="radio" id="yes" name="pet">
+                                <label for="yes">ใช่</label>
+                            </div>   
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <input type="radio" id="no" name="pet">
+                                <label for="no">ไม่</label>
+                            </div>   
+                        </div>
+                    </div>
+                    <button type="button" class="block-cancle">บันทึกข้อมูลที่พัก</button>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <p>
+                                <label style="color: #14bf98;">
+                                    <i class="far fa-lightbulb"></i>Tips!
+                                </label> 
+                                จองครั้งต่อไปได้เร็วขึ้น โดยใช้ข้อมูลที่พักที่บันทึกไว้
+                            </p>
+                        </div>
+                    </div>
+                    <p>ใบกำกับภาษี</p>
+                    <div class="row">
+                        <div class="one-edge-shadow m-2 w-100">
+                            <div>
+                                <input type="radio" id="yesVat" name="vat">
+                                <label for="yesVat">ต้องการใบกำกับภาษีเต็มรูป (สำหรับบริษัทเท่านั้น)</label>
+                            </div> 
+                        </div>
+                    </div>
+                    <p>วิธีชำระเงิน</p>
+                    <div class="row">
+                        <div class="one-edge-shadow m-2 w-100">
+                            <div>
+                                <input type="radio" id="debit" name="pay">
+                                <label for="debit">ชำระเงิน่น่านบัตรเดบิต</label>
+                            </div> 
+                        </div>
+                        <div class="one-edge-shadow m-2 w-100">
+                            <div>
+                                <input type="radio" id="interBank" name="pay">
+                                <label for="interBank">ชำระเงินด้วยวิธีโอนเงิน/Internet Banking</label>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card mt-3 mb-3 w-100 card-shadow">
+                            <div class="card-header text-primary p-3"><b>เงื่อนไขการให้บริการ</b></div>
+                            <div class="card-body text-dark" style="background:none;">
+                              <p class="card-text">
+                                <p>&bull; ท่านรับทราบและยืนยันว่า ท่าจะไม่ทิ้งทรัพย์สินมีค่า (เช่น เงินสด,เครื่องประดับ) ไว้ในพื้นที่บริการ</p>
+                                <p>&bull; บริษัทไม่รับผิดชอบต่อการสูญหายองทรัพย์สิน ในพื้นที่บริการ</p>
+                              </p>
+                            </div>
+                            <div class="card-footer text-primary p-3"><b>นโยบายยกเลิก และคืนเงิน</b></div>
+                          </div>
+                    </div>
+                    <p>&bull; ผู้ใช้บริการสามารถยกเลิกบริการ โดยมี 3 เงิ่อนไขที่ต้องทราบดังนี้</p>
+                    <p>&bull; หากยกเลิกก่อนที่การจองของผู้ใช้บริการจะได้รับการยืนยัน ผู้ใช้บริการจะไม่เสียค่าใช้จ่ายใดๆ จากกรณีนี้</p>
+                    <p>&bull; หากยกเลิกภายหลังการจองของผู้ใช้บริการถูกยืนยันแล้ว และทำการยกเลิกก่อนถึงเวลานัดหมายมากกว่า 24 ชั่วโมง ผู้ให้บริการจะไม่คืนเงินค่าธรรมเนียมการชำระเงินจากบัตรเครดิต/เดบิต 4% ให้กับผู้ใช้บริการ ดังนั้นผู้ใช้บริการจะได้รับเงินคืน 96%</p>
+                    <p>&bull; หากยกเลิกภายหลังการจองของผู้ใช้บริการถูกยืนยันแล้ว และยกเลิกก่อนถึงเวลานัดหมายน้อยกว่า24 ชั่วโมง ผู้ให้บริการจะคืนเงินให้กับผู้ใช้บริการเพียง 50% เท่านั้น</p>
+                    <p>&bull; หากยกเลิกภายหลังการจองของผู้ใช้บริการถูกยืนยันแล้ว และยกเลิกก่อนถึงเวลานัดหมายน้อยกว่า 2 ชั่วโมง ผู้ให้บริการจะไม่คืนเงินให้กับผู้ใช้บริการ</p> 
+                    <p>&bull; เงินที่ผู้ใช้บริการจะได้รับคืนนั้น ทางผู้ให้บริการจะคืนเงินเข้าบัญชีบัตรเครดิต/เดบิตของผู้ใช้บริการในรอบบิลถัดไป</p>
+                    <br>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="accept" name="accept">
+                        <label class="custom-control-label text-bold" for="accept">ฉันยอมรับ เงื่อนไขการให้บริการ และ นโยบายการยกเลิก</label>
+                    </div>  
+                    <button type="button" class="block"><a href="{% url 'myapp:booking' %}">ยืนยันการจอง</button></a>
+                    <div class="row w-100">
+                        <a href="{% url 'myapp:accept' %}" class="text-center text-primary w-100"><i class="fas fa-chevron-left"></i>ย้อนกลับ</a>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+            </div> 
+        </div>
+    </body>
+
+    
+    <!-- Contact -->
+    <div id="contact" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title"></div>
+                        <h2>ติดต่อเรา</h2>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="address"><i class="fas fa-map-marker-alt"></i>สาขากรุงเทพ : จตุจักร โครงการลุมพินี ทาวน์เพลส รัชโยธิน เสนา ถนนเสนานิคม 1 ซอย จันทรเกษม เขตจตุจักร กรุงเทพมหานคร 10900</li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">02-999-9999</a></li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">089-999-9999</a></li>
+                            <li><i class="fas fa-envelope"></i><a href="mailto:office@aria.com">info@bugbud.co.th</a></li>
+                        </ul>
+                        
+
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-pinterest fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-behance fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                
+    
+    
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="{% static 'js/morphext.min.js' %}"></script> <!-- Morphtext rotating text in the header -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script> <!-- Isotope for filter -->
+    <script src="{% static 'js/validator.min.js' %}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Custom scripts -->
+</body>
+</html>
+{% endblock %}

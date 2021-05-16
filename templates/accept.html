@@ -1,0 +1,249 @@
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Aria is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>ยืนยันการจองของ</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a  class="navbar-brand logo-image" href="{% url 'myapp:home' %}"><img src="{% static 'images/logo.png' %}" alt="alternative"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button> 
+        
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+            {% if request.user.customer %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:mybook' %}">การจองของฉัน</a>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            {% endif %}
+            <li class="nav-item dropdown">
+                {% if request.user.customer %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ข้อความ
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'myapp:text' %}">ข้อความ</a>
+                <a class="dropdown-item" href="{% url 'myapp:notifications' %}">การแจ้งเตือน</a>
+                </div>
+                {% endif %}
+            </li>
+            <li class="nav-item dropdown">
+               
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if request.user.customer %}
+                <li class="nav-item dropdown"><img src="{% static 'images/profile.JPG' %}" alt="profile_image" style="border-radius: 50%; height: 25px; width: 25px;">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'myapp:customerprofile' %}">แก้ไขโปรไฟล์</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerrate' %}">รีวิวของฉัน</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogout' %}">Logout</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'myapp:customerregistration' %}">Register</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogin' %}">Login</a>
+                {% endif %}
+                </div>
+            </li>
+            
+        </div>
+    </nav>
+     <!-- Header -->
+     <header id="header" class="ex-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>การจองของฉัน</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>จองบริการ</h2>
+                </div> <!-- end of col -->
+                <div class="col-lg-12">
+                    <div class="container">
+                        <form action="/action_page.php">
+                          <label for="fname">คุณต้องการใช้บริการที่ไหน</label>
+                          <select id="fname" name="fname">
+                            <option value="australia">กรุงเทพ และปริมลฑล</option>
+                          </select>
+                      
+                          <label for="lname">กรุณาเลือกประเภทที่พัก เพื่อให้เราช่วยคุณประเมินระยะเวลาทำความสะอาด และค่าบริการ</label>
+                          <select id="lname" name="lname">
+                            <option value="australia">คอนโด 1 ห้องนอน (ไม่เกิน 40 ตร.ม)</option>
+                           </select>
+                           <p>คุณต้องการใช้บริการนี้เมื่อไหร่</p>
+                           <div class="row">
+                                <div class="col-md-6">
+                                    <input placeholder="คลิกเลือกวันที่" id="date" style="padding: 0;border: none;border-bottom: 1px solid black;">
+                                </div>
+                                <div class="col-md-6">
+                                    <input  placeholder="คลิกเลือกเวลา" id="time" style="padding: 9px;border: none;border-bottom: 1px solid black;">
+                                </div> 
+                           </div>
+                           <hr>
+                           <div class="row">
+                               <div class="col-6">
+                                   <p>ค่าบริการ(ยังไม่รวมภาษี)</p>
+                               </div>
+                               <div class="col-6 text-right">
+                                   <p style="color: #14bf98;;">฿500.00</p>
+                               </div>
+                           </div>
+                        </form>
+                        <button type="button" class="block"><a href="{% url 'myapp:payment' %}">ถัดไป</button></a>
+                    </div>
+                </div>
+            </div> <!-- end of col -->
+        </div>
+    </body>
+
+    
+    <!-- Contact -->
+    <div id="contact" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title"></div>
+                        <h2>ติดต่อเรา</h2>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="address"><i class="fas fa-map-marker-alt"></i>สาขากรุงเทพ : จตุจักร โครงการลุมพินี ทาวน์เพลส รัชโยธิน เสนา ถนนเสนานิคม 1 ซอย จันทรเกษม เขตจตุจักร กรุงเทพมหานคร 10900</li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">02-999-9999</a></li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">089-999-9999</a></li>
+                            <li><i class="fas fa-envelope"></i><a href="mailto:office@aria.com">info@bugbud.co.th</a></li>
+                        </ul>
+                        
+
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-pinterest fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-behance fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                
+    
+    
+
+    <script>
+    $('#date').datepicker({
+        uiLibrary: 'bootstrap'
+    });
+    $('#time').timepicker({
+        timeFormat: 'h:mm p',
+        interval: 60,
+        minTime: '10',
+        maxTime: '6:00pm',
+        defaultTime: '11',
+        startTime: '10:00',
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true
+     });
+    </script>
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="{% static 'js/morphext.min.js' %}"></script> <!-- Morphtext rotating text in the header -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script> <!-- Isotope for filter -->
+    <script src="{% static 'js/validator.min.js' %}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Custom scripts -->
+</body>
+</html>
+{% endblock %}
+

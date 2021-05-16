@@ -1,0 +1,474 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Aria is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext' %}" rel="stylesheet">
+    <link href="{% static 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+    <link href="{% static 'css/swiper.css' %}" rel="stylesheet">
+	<link href="{% static 'css/magnific-popup.css' %}" rel="stylesheet">
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet">
+	
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+
+    <div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+
+     <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <a  class="navbar-brand logo-image" href="{% url 'myapp:home' %}"><img src="{% static 'images/logo.png' %}" alt="alternative"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button> 
+        
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+            {% if request.user.customer %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:mybook' %}">การจองของฉัน</a>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:promotion' %}">โปรโมชั่น</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'myapp:service' %}">บริการของเรา</a>
+            </li>&nbsp; &nbsp; &nbsp;
+            {% endif %}
+            <li class="nav-item dropdown">
+                {% if request.user.customer %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                ข้อความ
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'myapp:text' %}">ข้อความ</a>
+                <a class="dropdown-item" href="{% url 'myapp:notifications' %}">การแจ้งเตือน</a>
+                </div>
+                {% endif %}
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if request.user.customer %}
+                <li class="nav-item dropdown"><img src="{% static 'images/profile.JPG' %}" alt="profile_image" style="border-radius: 50%; height: 25px; width: 25px;">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'myapp:customerprofile' %}">แก้ไขโปรไฟล์</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerrate' %}">รีวิวของฉัน</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogout' %}">Logout</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'myapp:customerregistration' %}">Register</a>
+                <a class="dropdown-item" href="{% url 'myapp:customerlogin' %}">Login</a>
+                {% endif %}
+                </div>
+            </li>
+            
+        </div>
+    </nav>
+
+     <!-- Header -->
+     <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-container">
+                            <h1>BUGBUD</h1>
+                            <h1>เราเป็นเพื่อนรัก</h1>
+                            <h1>กำจัดแมลงให้คุณเอง</h1>
+                        </div>
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+
+    <!-- Promotion -->
+    <div class="slider">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>โปรโมชั่น</h2>
+                </div> <!-- end of col -->
+                <div class="col-lg-12">
+
+                    <!-- Card Slider -->
+                    <div class="slider-container">
+                        <div class="swiper-container card-slider">
+                            <div class="swiper-wrapper">
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" src="{%static 'images/promotion1.jpg' %}" alt="alternative">
+                                    </div>
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+                                
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" src="{% static 'images/promotion2.jpg' %}" alt="alternative">
+                                    </div>
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+
+                                <!-- Slide -->
+                                <div class="swiper-slide">
+                                    <div class="card">
+                                        <img class="card-image" src="{% static 'images/promotion3.jpg' %}" alt="alternative">
+                                    </div>
+                                </div> <!-- end of swiper-slide -->
+                                <!-- end of slide -->
+                            
+                            </div> <!-- end of swiper-wrapper -->
+        
+                            <!-- Add Arrows -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <!-- end of add arrows -->
+        
+                        </div> <!-- end of swiper-container -->
+                    </div> <!-- end of sliedr-container -->
+                    <!-- end of card slider -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of slider -->
+    <!-- end of testimonials -->
+
+
+    <!-- บริการ -->
+    <div class="cards-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>บริการ</h2>
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/service1.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">จับสัตว์เล็ก</h4>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/service2.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">กำจัดแมลง</h4>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-1 -->
+    <!-- end of description -->
+
+    
+
+ <!-- บริษัทยอดนิยม -->
+ <div id="services" class="cards-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>บริษัทยอดนิยม</h2>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" src="{% static 'images/company1.jpg' %}" alt="alternative">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">PCS</h3>
+                        <p>บริษัท เพสคอนโทรเซอร์วิส จำกัด</p>
+                        
+                    </div>
+                    <div class="button-container">
+                        <a class="btn-solid-reg page-scroll" href="{% url 'myapp:accept' %}">จองบริการ</a>
+                    </div> <!-- end of button-container -->
+                </div>
+                <!-- end of card -->
+
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" src="{% static 'images/company2.jpg' %}" alt="alternative">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">King Service</h3>
+                        <p>บริษัท คิงเซอร์วิส จำกัด</p>
+                        <ul class="list-unstyled li-space-lg">
+                    </div>
+                    <div class="button-container">
+                        <a class="btn-solid-reg page-scroll" href="{% url 'myapp:accept' %}">จองยริการ</a>
+                    </div> <!-- end of button-container -->
+                </div>
+                <!-- end of card -->
+
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" src="{% static 'images/company3.jpg' %}" alt="alternative">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Chemin</h3>
+                        <p>บริษัท เคมมิคอลอินไซด์ จำกัด</p>
+                        <ul class="list-unstyled li-space-lg">
+                    </div>
+                    <div class="button-container">
+                        <a class="btn-solid-reg page-scroll" href="{% url 'myapp:accept' %}">จองบริการ</a>
+                    </div> <!-- end of button-container -->
+                </div>
+                <!-- end of card -->
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of cards-2 -->
+<!-- end of services -->
+    <!-- ใช้งานอย่างไร -->
+    <div class="cards-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>BUGBUD ใช้งานอย่างไร</h2>
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/book.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">จอง</h4>
+                            <p>เลือกวันเวลาและสถานที่ BUGBUD จะช่วยค้นหาผู้ให้บริการที่เหมาะสมให้</p>
+                            <h4></h4>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/accept.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">ยืนยัน</h4>
+                            <p>ผู้ให้บริการจะยืนยันวันเวลาและสถานที่ที่คุณนัดหมาย ภายใน 24 ชั่วโมง</p>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/use.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">รับบริการ</h4>
+                            <p>รับบริการตามที่คุณนัดหมายไว้</p>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-1 -->
+    <!-- end of description -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-1 -->
+    <!-- end of description -->
+
+    <!-- Details 1 -->
+	<div id="details" class="accordion">
+		<div class="area-1">
+		</div><!-- end of area-1 on same line and no space between comments to eliminate margin white space --><div class="area-2">
+            
+            <!-- Accordion -->
+            <div class="accordion-container" id="accordionOne">
+                <h2>การคัดเลือกผู้ให้บริการ</h2>
+                <p>บริษัทกำจัดแมลงในแพลตฟอร์ม BUGBUD คือ</p>
+                <p>บริษัทกำจัดแมลงที่ได้รับรองความปลอดภัย</p>
+                <p>ตามมาตรฐานสากลและอาศัยอยู่ในละแวก</p>
+                <p>เดียวกับคุณ พวกเขาเหล่านี้เป็นมิตรและ</p>
+                <p>พร้อมช่วยเหลือคุณ</p>
+                <a class="btn-solid-lg page-scroll" href="#intro">เกณฑ์การคัดเลือก</a>
+            </div> <!-- end of accordion-container -->
+            <!-- end of accordion -->
+
+		</div> <!-- end of area-2 -->
+    </div> <!-- end of accordion -->
+    <!-- end of details 1 -->
+
+    <!-- ทำไมต้อง bugbud -->
+    <div class="cards-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>ทำไมต้อง BUGBUD</h2>
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/clean.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">ความสะอาดและสุขอนามัย</h4>
+                            <p>ทางบริษัทจะไปพร้อมอุปกรณ์และน้ำยากำจัดแมลงเพื่อช่วยให้ที่พักคุณปลอดภัยน่าอยู่มากยิ่งขึ้น</p>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <!-- Card -->
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/private.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">ความเป็นส่วนตัวที่หาจากที่ไหนไม่ได้</h4>
+                            <p>เราให้ความสำคัญกับความไว้เนื้อเชื่อใจและความเป็นส่วนตัวดังนั้นคุณสามารถเลือกบริษัทที่คุณสนใจโดยพิจารณาจากโปรไฟล์และรีวิว</p>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <div class="card">
+                        <img class="card-image" src="{% static 'images/save.jpg' %}" alt="alternative">
+                        <div class="card-body">
+                            <h4 class="card-title">รับรองความปลอดภัย</h4>
+                            <p>ทางเราให้ความสำคัญกับความปลอดภัยของผู้ใช้งานทั้งสองฝ่ายเป็นหลักรวมถึงเรื่องความปลอดภัยในข้อมูลของบริษัทกำจัดแมลงและสุขภาพของฝ่ายผู้ใช้งาน</p>
+                        </div>
+                    </div>
+                    <!-- end of card -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of cards-1 -->
+    <!-- end of description -->
+
+    <!-- Details 2 -->
+	<div id="details2" class="tabs">
+		<div class="area-1">
+		</div><!-- end of area-1 on same line and no space between comments to eliminate margin white space --><div class="area-2">
+            
+            <!-- Accordion -->
+            <div class="tabs-container">
+                <h2>มาร่วมเป็นพาร์ทเนอร์กับ BUGBUD</h2>
+                <p>หากบริษัทของคุณมีการผลิตที่ปลอดภัย</p>
+                <p>ไม่มีสารเคมีอันตรายใดๆ และมีผู้ให้บริการ</p>
+                <p>ที่มีความรู้ด้านนี้โดยเฉพาะและมีใจรักงานให้</p>
+                <p>บริการ บริษัทคุณสามารถเข้าร่วมกับเป็น</p>
+                <p>พาร์ทเนอร์กับเรา</p>
+                <a class="btn-solid-lg page-scroll" href="#intro">เกณฑ์การคัดเลือก</a>
+            </div> <!-- end of accordion-container -->
+        </div> <!-- end of area-2 -->
+            <!-- end of accordion -->
+    <!-- end of details 2 -->
+
+
+    
+    <!-- Contact -->
+    <div id="contact" class="form-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <div class="section-title"></div>
+                        <h2>ติดต่อเรา</h2>
+                        <ul class="list-unstyled li-space-lg">
+                            <li class="address"><i class="fas fa-map-marker-alt"></i>สาขากรุงเทพ : จตุจักร โครงการลุมพินี ทาวน์เพลส รัชโยธิน เสนา ถนนเสนานิคม 1 ซอย จันทรเกษม เขตจตุจักร กรุงเทพมหานคร 10900</li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">02-999-9999</a></li>
+                            <li><i class="fas fa-phone"></i><a href="tel:003024630820">089-999-9999</a></li>
+                            <li><i class="fas fa-envelope"></i><a href="mailto:office@aria.com">info@bugbud.co.th</a></li>
+                        </ul>
+                        
+
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-pinterest fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-behance fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div> <!-- end of text-container -->
+                </div> <!-- end of col -->
+                
+    
+    	
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="{% static 'js/popper.min.js' %}"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> <!-- Bootstrap framework -->
+    <script src="{% static 'js/jquery.easing.min.js' %}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="{% static 'js/swiper.min.js' %}"></script> <!-- Swiper for image and text sliders -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="{% static 'js/morphext.min.js' %}"></script> <!-- Morphtext rotating text in the header -->
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script> <!-- Isotope for filter -->
+    <script src="{% static 'js/validator.min.js' %}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Custom scripts -->
+</body>
+</html>
+
+   
+    {% block content %}
+    {% endblock %}
+
+  
